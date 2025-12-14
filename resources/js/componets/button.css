@@ -1,0 +1,13 @@
+.defaultbtnstyle{
+
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: var(--admin-primary-color);
+    color: var(--admin-sidebar-text-color);
+    font-size: 20px;
+}
+.defaultcolor{
+ background-color: var(--admin-primary-color) !important;
+}
+

@@ -1,0 +1,31 @@
+.adminsidebar_container{
+width: 100% !important;
+margin: 0px 10px 0px 0px;
+
+}
+.adminsidebar_container ul{
+    display: flex;
+    flex-direction: column;
+}
+.adminsidebar_container ul li{
+    padding: 9px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.adminsidebar_container ul li:hover{
+    background-color: var(--admin-primary-color);
+    cursor: pointer;
+    border-radius: 5px;
+}
+.adminsidebar_container ul li a{
+    color: var(--admin-sidebar-text-color);
+    text-decoration: none;
+}
+.sidebaricons{
+    color: var(--admin-sidebar-text-color);
+    font-size: 20px;
+}
+.activelink{
+   background-color: red !important;
+}

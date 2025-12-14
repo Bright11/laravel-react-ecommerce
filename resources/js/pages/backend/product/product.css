@@ -1,0 +1,8 @@
+
+.btncolor{
+    background-color: var(--admin-sidebar-bg-color) !important;
+}
+
+.tableclass{
+    margin-top: 10px !important;
+}

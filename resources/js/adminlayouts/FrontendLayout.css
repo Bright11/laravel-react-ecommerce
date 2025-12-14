@@ -1,0 +1,20 @@
+.adminmainpagelayout{
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+aside{
+    width:15%;
+    position: fixed;
+    background-color: var(--admin-sidebar-bg-color);
+    height: 100vh;
+    position: fixed;
+    margin:0;
+}
+main{
+    width: 80% !important;
+    margin: auto;
+    margin-right: 10px;
+    background-color: var(--admin-bg-color);
+    padding: 0px 20px 0px 20px;
+}

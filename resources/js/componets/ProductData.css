@@ -1,0 +1,21 @@
+.productdata_container{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 0px 20px 0px 20px;
+}
+.productdata_container .counterdiv{
+    width: 250px;
+    background-color: var(--admin-div-bg-color);
+    height: 100px;
+}
+.counterdiv p{
+    text-align: center;
+}
+.item_counter{
+    display:flex;
+    justify-content: space-between;
+    padding: 8px;
+}
