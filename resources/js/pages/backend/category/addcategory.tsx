@@ -56,7 +56,7 @@ function Addcategory() {
     }
 
     return (
-        <BackendLayout sidebar={true} footer={false} navbar={false}>
+        <BackendLayout sidebar={true} footer={false} navbar={true}>
             {/* <h1>hi{data?.category}</h1> */}
             <Form onclick={savedata} data={forminput} formdataonchange={onchangehandler} />
 

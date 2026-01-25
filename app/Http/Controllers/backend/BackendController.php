@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -12,17 +13,36 @@ use Illuminate\Support\Str;
 
 class BackendController extends Controller
 {
-    //
+public function dashboard(){
+    return Inertia::render('backend/dashboard/dashboard');
+}
     public function addproductform(){
         $categorydata=Category::all();
-        $products=Product::all()->map(function($product){
-            return[
-                'id'=>$product->id,
-                'name'=>$product->productname,
-                'category'=>$product->category->name,
-                'image_url' => asset('storage/' . $product->image),
-            ];
-        });
+        // $products=Product::all()->map(function($product){
+        //     return[
+        //         'id'=>$product->id,
+        //         'name'=>$product->productname,
+        //         'category'=>$product->category->name,
+        //         'price'=>$product->price,
+        //         'purchese'=>$product->purcheseprice,
+        //         'image_url' => asset('storage/' . $product->image),
+        //     ];
+        // });
+        $products = Product::latest()
+    ->paginate(6)
+    ->through(function ($product) {
+        return [
+            'id'        => $product->id,
+            'name'      => $product->productname,
+            'category'  => $product->category?->name,
+            'price'     => $product->price,
+            'purchese'  => $product->purcheseprice,
+            'stock'     => $product->stock,
+            'image_url' => $product->image
+                ? asset('storage/' . $product->image)
+                : null,
+        ];
+    });
         return Inertia::render('backend/product/addproduct',compact("categorydata","products"));
     }
     public function addcategoryform(){
@@ -137,4 +157,16 @@ public function saveeditedproduct(Request $req,$id)
         return redirect()->route("addproduct");
 }
 
+public function users()
+{
+    $users=User::all();
+    return Inertia::render("backend/users/users",compact("users"));
+}
+public function updateuserposstion(Request $req,$id)
+{
+    $getuserrole=User::findOrFail($id);
+    $getuserrole->role_as=$req->role_as;
+    $getuserrole->save();
+    return redirect()->back()->with(["status","User updated",'reload', true]);
+}
 }

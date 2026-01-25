@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { MouseEventHandler } from 'react'
 import './button.css'
 
 interface buttontype{
     text:string,
-    onclick:()=>void,
+    // onclick:()=>void,
+    onclick: MouseEventHandler<HTMLButtonElement>;
     style?:string,
 }
 

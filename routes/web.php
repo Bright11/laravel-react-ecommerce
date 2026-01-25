@@ -1,13 +1,14 @@
 <?php
 
+use App\Http\Controllers\auth\AuthController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\backend\BackendController;
+use App\Http\Controllers\frontend\FrontendController;
 
-
-Route::get('/', function () {
-    return Inertia::render('welcome');
-})->name('home');
+// Route::get('/', function () {
+//     return Inertia::render('frontend/home');
+// })->name('home');
 
 // Route::get("admin/addproduct",[BackendController::class,'addproductform'])->name("addproduct");
 // Route::get("admin/addcategory",[BackendController::class,'addcategoryform'])->name("addcategory");
@@ -15,17 +16,32 @@ Route::get('/', function () {
 
 
 
-Route::prefix('admin')->controller(BackendController::class)->group(function() {
-    Route::get('addproduct', 'addproductform')->name('addproduct');
-    Route::post('saveproduct', 'saveproduct')->name('saveproduct');
-    Route::get('addcategory', 'addcategoryform')->name('addcategory');
-    Route::post('savecategory', 'savecategory')->name('savecategory');
-    Route::get('editcategory/{id}', 'editcategory')->name('editcategory');
-    Route::put('saveeditedcategegory/{id}', 'saveeditedcategegory')->name('saveeditedcategegory');
-    Route::get('deletecategory/{id}', 'deletecategory')->name('deletecategory');
-    Route::get('editproduct/{id}', 'editproduct')->name('editproduct');
-    Route::put("/saveeditedproduct/{id}",'saveeditedproduct')->name("saveeditedproduct");
+// Route::prefix('admin')->controller(BackendController::class)->group(function() {
 
 
 
+// });
+Route::get("/register",[AuthController::class,"register"])->name("register");
+Route::post("/registeruser",[AuthController::class,"registeruser"])->name("registeruser");
+Route::get("/login",[AuthController::class,"login"])->name("login");
+Route::post("/loginuser",[AuthController::class,"loginuser"])->name("loginuser");
+Route::get("/logout",[AuthController::class,"logout"])->name("logout");
+
+Route::middleware(['cartcount'])->group(function(){
+Route::get("/",[FrontendController::class,"home"])->name("home");
+
+Route::get("/details/{id}",[FrontendController::class,"details"])->name("details");
+
+
+
+
+
+// cartcount
+Route::middleware(['user',"is_active"])->group(function(){
+    Route::get("/cartpage",[FrontendController::class, "cartpage"])->name('cartpage');
 });
+Route::get("/addtocart/{id}",[FrontendController::class, "addtocart"])->name("addtocart");
+});
+
+
+

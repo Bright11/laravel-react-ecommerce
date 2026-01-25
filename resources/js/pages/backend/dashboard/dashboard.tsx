@@ -4,7 +4,7 @@ import BackendLayout from '@/adminlayouts/BackendLayout';
 
 import { Head } from '@inertiajs/react';
 
-export default function Welcome() {
+export default function Dashboard() {
     const savedata=()=>{
         alert("data saved");
     }

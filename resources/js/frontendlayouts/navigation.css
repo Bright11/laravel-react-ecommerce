@@ -1,0 +1,53 @@
+.navigation_container{
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 20px;
+    background: black;
+    position: fixed !important;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+
+}
+.divider{
+    margin-bottom: 70px;
+}
+.sitelogo img{
+    width: 40x;
+    height: 40px;
+    background: white;
+    border-radius: 50%;
+    padding: 4px;
+}
+.frontpage_ul{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+}
+.frontpage_ul li{
+    padding: 4px 8px;
+    border-bottom: 1px solid black;
+    list-style: none;
+    transition: border-bottom 0.3s ease;
+}
+.frontpage_ul li:hover{
+    border-bottom: 1px solid white;
+}
+.frontpage_ul li a{
+    color: white;
+}
+.mobile_viewbnt{
+    display: none;
+    cursor: pointer;
+}
+.cartcount a{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+@media (min-width: 480px) and (max-width: 767px){
+    .mobile_viewbnt{
+        display: block;
+    }
+}

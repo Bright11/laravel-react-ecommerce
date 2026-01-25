@@ -5,6 +5,7 @@ import './FrontendLayout.css'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import AdminTopbar from './AdminTopbar';
 
 interface layoutsprops{
     children:ReactNode;
@@ -15,7 +16,9 @@ interface layoutsprops{
 function BackendLayout({children,navbar, footer, sidebar}:layoutsprops) {
   return (
     <div>
-       {navbar && <nav></nav>}
+       {navbar && <nav>
+        <AdminTopbar/>
+        </nav>}
        <div className='adminmainpagelayout'>
         {sidebar && <aside>
             <AdminSidebar/>

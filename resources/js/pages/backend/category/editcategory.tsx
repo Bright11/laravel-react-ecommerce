@@ -30,7 +30,7 @@ const updatedata=async(e:any)=>{
     )
 }
   return (
-    <BackendLayout sidebar={true}>
+    <BackendLayout navbar={true} sidebar={true}>
 
         <Form onclick={updatedata} formdataonchange={handlechange} data={inputs}/>
     </BackendLayout>

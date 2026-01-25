@@ -5,6 +5,7 @@ import './product.css'
 import { Link } from '@inertiajs/react'
 import { router,usePage,useForm } from '@inertiajs/react'
 import { toast } from "react-toastify";
+import Pagination from '@/componets/Pagination'
 
 
 
@@ -176,13 +177,25 @@ function Addproduct() {
                                 <th className="p-3 text-left text-sm font-semibold text-gray-700">
                                 Image
                             </th>
+                             <th className="p-3 text-left text-sm font-semibold text-gray-700">
+                                Category
+                            </th>
+                             <th className="p-3 text-left text-sm font-semibold text-gray-700">
+                                Price
+                            </th>
+                             <th className="p-3 text-left text-sm font-semibold text-gray-700">
+                                Purchese Price
+                            </th>
+                            <th className="p-3 text-left text-sm font-semibold text-gray-700">
+                               Stock
+                            </th>
                             <th className="p-3 text-left text-sm font-semibold text-gray-700">Edit</th>
                             <th className="p-3 text-left text-sm font-semibold text-gray-700">Delete</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        {products?.map((items: any) => (
+                        {products?.data?.map((items: any) => (
                             <tr key={items?.id} className="border-b">
                                 <td className="p-3">{items?.name}</td>
                                  <td className="p-3">
@@ -194,7 +207,15 @@ function Addproduct() {
                                  <td>
                                     {items?.category}
                                  </td>
-
+                                 <td>
+                                   ${items?.price}
+                                 </td>
+                                 <td>
+                                    ${items?.purchese}
+                                 </td>
+                                    <td>
+                                    {items?.stock}
+                                 </td>
                                 <td className="p-3">
                                     <Link href={`/admin/editproduct/${items?.id}`} className="rounded bg-blue-600 px-3 py-1 text-white hover:bg-blue-700">Update</Link>
                                 </td>
@@ -212,8 +233,9 @@ function Addproduct() {
 
                     </tbody>
                 </table>
-
+<Pagination links={products.links} />
             </div>
+
 </div>
 
 :

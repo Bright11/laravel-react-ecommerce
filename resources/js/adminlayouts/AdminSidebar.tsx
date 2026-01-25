@@ -1,3 +1,4 @@
+import { FaUserShield } from "react-icons/fa";
 import React, { useState } from 'react'
 import './AdminSidebar.css'
 import { RiDashboardLine } from "react-icons/ri";
@@ -15,7 +16,7 @@ function AdminSidebar() {
         },
         {
             name:"Dashboard",
-            link:"/admin/Dashboard",
+            link:"/admin/dashboard",
             icons: <RiDashboardLine className='sidebaricons' />
         },
         {
@@ -28,6 +29,11 @@ function AdminSidebar() {
             link:"/admin/addcategory",
             icons:<MdCategory className='sidebaricons'/>
         },
+        {
+            name:"Users",
+            link:"/admin/users",
+            icons:<FaUserShield className='sidebaricons'/>
+        }
     ]
   return (
     <div className='adminsidebar_container'>
@@ -36,7 +42,7 @@ function AdminSidebar() {
                 <li key={index} className={`${url === item?.link ? "activelink":""}`}>
                      {item?.icons}
                 {/* <a href={item?.link}>{item?.name}</a> */}
-                <Link  href={item?.link}>{item?.name}</Link>
+                <Link   href={item?.link} target="_blank">{item?.name}</Link>
 
                 </li>
             ))}

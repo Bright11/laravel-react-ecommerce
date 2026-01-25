@@ -1,0 +1,12 @@
+.admintopbar_container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+    background-color: #3D464D;
+}
+.admintopbar_container ul{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
