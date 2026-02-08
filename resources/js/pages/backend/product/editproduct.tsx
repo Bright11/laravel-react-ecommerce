@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { usePage,useForm,router } from '@inertiajs/react'
 import BackendLayout from '@/adminlayouts/BackendLayout';
 import Form from '@/componets/Form';
@@ -6,6 +6,9 @@ import { toast } from "react-toastify";
 
 function Editproduct() {
     const {product,editcategory,category}:any = usePage().props;
+    // useEffect(()=>{
+    //      window.location.reload();
+    // })
     const [form,setForm]=useState({
          productname:product?.productname,
         price:product?.price,

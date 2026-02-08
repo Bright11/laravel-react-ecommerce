@@ -45,6 +45,7 @@ function Form({data,btncolor,onclick,textarea,formdataonchange,selectinput,optio
                 }
 
                 {options?.map((items:any,index:number)=>(
+
                     <option value={items?.id}>{items?.name}</option>
                 ))}
             </select>

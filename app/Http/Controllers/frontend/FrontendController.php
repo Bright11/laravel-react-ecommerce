@@ -75,6 +75,9 @@ class FrontendController extends Controller
                  'image'=>$data->products->image
                 ? asset('storage/' . $data->products->image)
                 : null,
+                'total'=>$data->products->price * $data->qty??null,
+                'qty'=>$data->qty??null,
+                "productId"=>$data->productId??null,
             ];
         });
         return Inertia::render("frontend/cartpage/cartpage",compact('userscart'));
@@ -85,11 +88,13 @@ class FrontendController extends Controller
 
 
         $product=Product::findOrfail($req->id);
+        // return $product;
         $checkwishlist=Wishlist::where("productId",$id)->first();
         $checkcart=Cart::where("user",Auth::user()->id)->where("productId",$id)->first();
         if($checkcart){
-            $checkcart->qty= +1;
-            $checkcart->totalprice=+$product->price;
+            $checkcart->qty = $checkcart->qty + 1;
+            $checkcart->totalprice= $checkcart->totalprice+$product->price;
+            $checkcart->save();
             return redirect()->back()->with("message","Item already exist");
         }
         $newcart=new Cart();
@@ -106,4 +111,33 @@ class FrontendController extends Controller
         }
 
     }
+
+    public function updatecart(Request $req,$id)
+    {
+        $req->validate([
+            'qty'=>'required | min:1',
+            'mode'=>'required'
+        ]);
+         $checkcart=Cart::where("id",$id)->where("user",Auth::user()->id)->first();
+         if(!$checkcart){
+            return back();
+         }
+        if($req->qty <1){
+            $checkcart->delete();
+           return back();
+        }
+
+         $getproduct=Product::where("id",$checkcart->productId)->first();
+
+       if($req->mode=="increased"){
+        $checkcart->qty=$req->qty;
+        $checkcart->save();
+         return back();
+       }
+    //    if($req->mode=="decreaseitem"){
+    //     $checkcart->qty=$checkcart->qty - $req->qty;
+    //     $checkcart->save();
+    //    }
+    }
 }
+

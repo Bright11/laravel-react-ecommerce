@@ -16,7 +16,7 @@ class BackendController extends Controller
 public function dashboard(){
     return Inertia::render('backend/dashboard/dashboard');
 }
-    public function addproductform(){
+    public function addproduct(){
         $categorydata=Category::all();
         // $products=Product::all()->map(function($product){
         //     return[
@@ -89,7 +89,7 @@ public function dashboard(){
         $category->name=$req->category;
         $category->slug=Str::slug($req->category);
         $category->update();
-        return redirect()->route("addcategory");
+        return redirect()->route("adminaddcategory");
     }
 
     public function deletecategory($id)
@@ -120,7 +120,7 @@ public function dashboard(){
         $products->category_id = $req->category;
         $products->save();
 
-        return redirect()->route("addproduct");
+        return redirect('admin/addproduct');
 
     }
 
@@ -152,9 +152,12 @@ public function saveeditedproduct(Request $req,$id)
             $imagePath = $req->file('file')->store('products', 'public');
             $products->image = $imagePath;
         }
+        if($req->category){
         $products->category_id = $req->category;
+        }
+
         $products->save();
-        return redirect()->route("addproduct");
+        return redirect()->route("adminaddproduct");
 }
 
 public function users()
@@ -168,5 +171,12 @@ public function updateuserposstion(Request $req,$id)
     $getuserrole->role_as=$req->role_as;
     $getuserrole->save();
     return redirect()->back()->with(["status","User updated",'reload', true]);
+}
+
+
+public function deleteproduct($id)
+{
+    Product::find($id)->delete();
+    return redirect()->back();
 }
 }

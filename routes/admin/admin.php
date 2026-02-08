@@ -16,7 +16,7 @@ Route::middleware(['user','is_admin'])->group(function(){
 
 Route::controller(BackendController::class)->group(function() {
      Route::get('dashboard', 'dashboard')->name('dashboard');
-     Route::get('addproduct', 'addproductform')->name('addproduct');
+     Route::get('addproduct', 'addproduct')->name('addproduct');
     Route::post('saveproduct', 'saveproduct')->name('saveproduct');
     Route::get('addcategory', 'addcategoryform')->name('addcategory');
     Route::post('savecategory', 'savecategory')->name('savecategory');
@@ -28,6 +28,8 @@ Route::controller(BackendController::class)->group(function() {
 
     Route::get("/users",[BackendController::class, "users"])->name("users");
     Route::post("/updateuserposstion/{id}",[BackendController::class, "updateuserposstion"])->name("updateuserposstion");
+
+    Route::get('/deleteproduct/{id}','deleteproduct')->name('deleteproduct');
 
 });
 });

@@ -1,0 +1,16 @@
+.cartpagecontainer{
+    margin-right: auto;
+    margin-left: autos;
+}
+.cartpageform input{
+    width: 50px;
+    border: 0.5px solid gray;
+    outline: 0px;
+}
+.cartpageform button{
+    border: 0px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: black;
+    color:white;
+}
