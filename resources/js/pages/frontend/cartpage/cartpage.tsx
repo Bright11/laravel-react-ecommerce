@@ -10,7 +10,8 @@ type CartItem = {
 };
 
 function Cartpage() {
-    const {userscart}:any=usePage().props;
+    const {userscart,totalitems}:any=usePage().props;
+    console.log("totalitems",totalitems)
     const [qty, setQty] = useState<Record<number, number>>({});
 
    useEffect(() => {
@@ -42,6 +43,9 @@ function Cartpage() {
 <div className="cartpagecontainer">
      <div className="w-full overflow-x-auto">
         {/* {qty} */}
+        {totalitems?(
+
+
   <table className="min-w-full border border-gray-200 rounded-lg overflow-hidden">
     <thead className="bg-gray-100">
       <tr>
@@ -51,6 +55,7 @@ function Cartpage() {
         <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">Qty</th>
         <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">Total</th>
         <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">Update</th>
+        <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">Delete</th>
       </tr>
     </thead>
     <tbody className="divide-y divide-gray-200">
@@ -67,7 +72,7 @@ function Cartpage() {
 
         <td className="px-4 py-3 text-sm text-gray-600">
             <form className='cartpageform'>
-                {/* <button onClick={(e)=>updatecart((e),item?.productId,'decreaseitem')}>-</button> */}
+                <button onClick={(e)=>updatecart((e),item?.id,'decreaseitem')}>-</button>
                 <input
 
             type="number"
@@ -81,24 +86,31 @@ function Cartpage() {
                 [item.id]: value === '' ? 1 : Number(value),
                 }));
             }}
+            placeholder='Qty'
+
             />
-                <button onClick={(e)=>updatecart((e),item?.id,"increased")} >Update</button>
+                <button onClick={(e)=>updatecart((e),item?.id,"increased")} >+</button>
             </form>
         </td>
 
         <td className="px-4 py-3">
-          <span className="inline-flex px-2 py-1 text-xs font-medium bg-green-100 text-green-700 rounded">
-            Active
+          <span className="inline-flex px-2 py-1 text-xs font-medium bg-red-100 text-red-700 rounded">
+            <a href={`/deletecart/${item?.id}`}>Delete</a>
           </span>
         </td>
       </tr>
    ))}
-
+<tr>
+    <td>Total ${totalitems}</td>
+</tr>
 
 
     </tbody>
   </table>
-</div>s
+  ):(
+    <h1>No item in the cart</h1>
+  )}
+</div>
 </div>
 
 

@@ -41,6 +41,7 @@ Route::middleware(['user',"is_active"])->group(function(){
     Route::get("/cartpage",[FrontendController::class, "cartpage"])->name('cartpage');
     Route::get("/addtocart/{id}",[FrontendController::class, "addtocart"])->name("addtocart");
     Route::post("/updatecart/{id}",[FrontendController::class, "updatecart"])->name("updatecart");
+    Route::get('/deletecart/{id}',[FrontendController::class, 'deletecart'])->name('deletecart');
 });
 ;
 });

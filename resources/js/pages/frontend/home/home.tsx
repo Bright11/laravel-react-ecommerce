@@ -35,6 +35,7 @@ function Home() {
     sidebar={true}mobilesidebar={mobilenav}
     sidebarcontent={<SidebarCategory/>}
     bottnclick={mobilenavfunction}
+    footer={true}
     >
 <div className='main_products'>
     <h2>Welcome to our E-commerce Store!</h2>

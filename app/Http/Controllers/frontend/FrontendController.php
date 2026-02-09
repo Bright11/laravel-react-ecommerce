@@ -66,6 +66,7 @@ class FrontendController extends Controller
 
     public function cartpage()
     {
+        $totalitems=Cart::where("user", Auth::user()->id)->sum("totalprice");
         $userscart=Cart::where("user",Auth::user()->id)->with("products")->get()->map(function($data){
             return [
                 'id'=>$data->id,
@@ -75,12 +76,12 @@ class FrontendController extends Controller
                  'image'=>$data->products->image
                 ? asset('storage/' . $data->products->image)
                 : null,
-                'total'=>$data->products->price * $data->qty??null,
+                'total'=>$data->totalprice??null,
                 'qty'=>$data->qty??null,
                 "productId"=>$data->productId??null,
             ];
         });
-        return Inertia::render("frontend/cartpage/cartpage",compact('userscart'));
+        return Inertia::render("frontend/cartpage/cartpage",compact('userscart','totalitems'));
     }
 
     public function addtocart(Request $req,$id)
@@ -122,7 +123,7 @@ class FrontendController extends Controller
          if(!$checkcart){
             return back();
          }
-        if($req->qty <1){
+        if($req->qty <=0){
             $checkcart->delete();
            return back();
         }
@@ -130,14 +131,29 @@ class FrontendController extends Controller
          $getproduct=Product::where("id",$checkcart->productId)->first();
 
        if($req->mode=="increased"){
-        $checkcart->qty=$req->qty;
+        $checkcart->qty=$checkcart->qty +$req->qty;
+         $checkcart->totalprice= $checkcart->totalprice+$getproduct->price * $req->qty;
         $checkcart->save();
+        if($checkcart->qty==0){
+            $checkcart->delete();
+        }
          return back();
        }
-    //    if($req->mode=="decreaseitem"){
-    //     $checkcart->qty=$checkcart->qty - $req->qty;
-    //     $checkcart->save();
-    //    }
+       if($req->mode=="decreaseitem"){
+        $checkcart->qty=$checkcart->qty -$req->qty;
+         $checkcart->totalprice= $checkcart->totalprice-$getproduct->price * $req->qty;
+        $checkcart->save();
+         if($checkcart->qty==0){
+            $checkcart->delete();
+        }
+         return back();
+       }
+    }
+
+    public function deletecart($id)
+    {
+        Cart::where('id',$id)->where("User", Auth::user()->id)->delete();
+        return back();
     }
 }
 

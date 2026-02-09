@@ -31,6 +31,7 @@ Route::controller(BackendController::class)->group(function() {
 
     Route::get('/deleteproduct/{id}','deleteproduct')->name('deleteproduct');
 
+
 });
 });
 

@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react'
 import Navigationbar from './Navigationbar'
 import Sidebar from './Sidebar'
 import './frontendlayoutcss.css'
+import Footer from './Footer'
 
  interface pageschildren{
     children:ReactNode,
@@ -30,7 +31,7 @@ function FrontendLayout({children,navigation,footer,sidebar,sidebarcontent,bottn
             {children}
         </div>
        </div>
-        {footer && <div></div>}
+        {footer && <Footer/>}
     </div>
   )
 }
